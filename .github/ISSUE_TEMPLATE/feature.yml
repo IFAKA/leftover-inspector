@@ -1,0 +1,14 @@
+name: Feature
+description: Propose a spec-backed feature
+body:
+  - type: input
+    id: spec
+    attributes: {label: Spec link, description: Link to docs/specs}
+    validations: {required: true}
+  - type: textarea
+    id: acceptance
+    attributes: {label: Acceptance criteria}
+    validations: {required: true}
+  - type: textarea
+    id: security
+    attributes: {label: Mutation and security impact}

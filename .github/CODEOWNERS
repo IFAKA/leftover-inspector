@@ -1,0 +1,3 @@
+* @maintainers
+src/actions/ @security-reviewers
+src/platform/ @platform-reviewers

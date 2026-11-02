@@ -1,0 +1,16 @@
+name: Release
+on:
+  workflow_dispatch:
+  push: {tags: ["v*"]}
+jobs:
+  build:
+    strategy: {matrix: {target: [darwin-arm64, darwin-x64, linux-x64, windows-x64]}}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun build src/main.ts --compile --target=bun-${{ matrix.target }} --outfile dist/leftover-inspector-${{ matrix.target }}
+      - run: sha256sum dist/* > dist/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with: {name: leftover-inspector-${{ matrix.target }}, path: dist/*}
